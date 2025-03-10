@@ -1,18 +1,18 @@
 <template>
   <div>
-    <PokemonCard v-for="(item, index) in pokemon" :key="item.name" :id="index + 1" :item="item">
+    <PokemonCard v-for="(item, index) in car_crashes" :key="item.name" :id="index + 1" :item="item">
     </PokemonCard>
   </div>
 </template>
 <script setup>
 import { onMounted, ref } from 'vue'
 import Graph from '@/components/questionData.vue'
-const pokemon = ref([])
-async function getPokemon() {
-  let res = await fetch('https://pokeapi.co/api/v2/pokemon?limit-151')
+const car_crashes = ref([])
+async function getCrashes() {
+  let res = await fetch('https://data.cityofnewyork.us/resource/pvqr-7yc4.json')
   let data = await res.json()
-  pokemon.value = data.results
+  car_crashes.value = data.results
 }
-onMounted(() => getPokemon())
+onMounted(() => getCrashes())
 </script>
 <style scoped></style>

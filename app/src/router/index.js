@@ -12,7 +12,7 @@ const router = createRouter({
     {
       path: '/graph',
       name: 'Graph',
-      component: () => import('../views/Graph.vue'),
+      component: () => import('../views/DataGraph.vue'),
     },
   ],
 })
