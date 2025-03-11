@@ -13,7 +13,7 @@ import { useRoute } from 'vue-router'
 const route = useRoute()
 const stored_data = ref([])
 async function getData() {
-  let res = await fetch(`https://data.cityofnewyork.us/resource/h9gi-nx95.json/${route.params.id}`) //figure out if API works
+  let res = await fetch(`https://data.cityofnewyork.us/resource/h9gi-nx95.json/${route.params.id}`) //API doesnt use ID
   let data = await res.json()
   stored_data.value = data
 }
