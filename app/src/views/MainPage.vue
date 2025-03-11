@@ -1,18 +1,13 @@
 <template>
   <div>
-    <QuestionData
-      v-for="(item, index) in car_crashes"
-      :key="item.name"
-      :id="index + 1"
-      :item="item"
-    >
+    <QuestionData v-for="item in car_crashes" :key="item.name" :id="item.collision_id" :item="item">
     </QuestionData>
   </div>
 </template>
 <script setup>
 import { onMounted, ref } from 'vue'
 import QuestionData from '@/components/questionData.vue'
-import Graph from '@/views/dataGraph.vue'
+import Graph from '@/views/DataGraph.vue'
 const car_crashes = ref([])
 async function getCrashes() {
   let res = await fetch('https://data.cityofnewyork.us/resource/h9gi-nx95.json')

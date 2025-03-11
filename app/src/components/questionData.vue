@@ -6,13 +6,17 @@
     <div class="flex flex-col space-y-2">
       <h1 class="text-lg font-bold text-gray-800">Vehicle Type: {{ item.vehicle_type_code1 }}</h1>
       <h2 class="text-sm text-gray-600 font-semibold">
-        People Injured: {{ item.number_of_persons_injured }}
+        People Injured: <span class="text-red-500">{{ item.number_of_persons_injured }}</span>
       </h2>
       <h2 class="text-sm text-gray-600 font-semibold">
-        People Killed: {{ item.number_of_persons_killed }}
+        People Killed: <span class="text-red-500">{{ item.number_of_persons_killed }}</span>
       </h2>
-      <h2 class="text-sm text-gray-600 font-semibold">Location: {{ item.on_street_name }}</h2>
-      <h2 class="text-sm text-gray-600 font-semibold">Time: {{ item.crash_time }}</h2>
+      <h2 class="text-sm text-gray-600 font-semibold">
+        Location: <span class="text-red-500">{{ item.on_street_name }}</span>
+      </h2>
+      <h2 class="text-sm text-gray-600 font-semibold">
+        Time: <span class="text-red-500">{{ item.crash_time }}</span>
+      </h2>
     </div>
   </router-link>
 </template>
@@ -23,6 +27,6 @@ import { computed } from 'vue'
 const props = defineProps({ item: Object, id: Number })
 
 const dataPath = computed(() => {
-  return `data/${props.id}`
+  return `graph/${props.id}`
 })
 </script>

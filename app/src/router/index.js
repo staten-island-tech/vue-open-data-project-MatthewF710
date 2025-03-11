@@ -10,7 +10,7 @@ const router = createRouter({
       component: MainPage,
     },
     {
-      path: '/graph',
+      path: '/graph/:id',
       name: 'Graph',
       component: () => import('../views/DataGraph.vue'),
     },
