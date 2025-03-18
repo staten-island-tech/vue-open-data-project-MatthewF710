@@ -1,5 +1,7 @@
 <template>
-  <Bar :data="chartData" :options="chartOptions" />
+  <div class="container">
+    <Bar v-if="loaded" :data="chartData" />
+  </div>
 </template>
 
 <script>
@@ -17,17 +19,21 @@ import {
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
 export default {
-  name: 'ChartComponent',
+  name: 'BarChart',
   components: { Bar },
-  props: {
-    chartData: {
-      type: Object,
-      required: true,
-    },
-    chartOptions: {
-      type: Object,
-      default: () => {},
-    },
+  data: () => ({
+    loaded: false,
+    chartData: null,
+  }),
+  async mounted() {
+    this.loaded = false
+    try {
+      const { userlist } = await fetch('https://data.cityofnewyork.us/resource/h9gi-nx95.json')
+      this.chartdata = userlist
+      this.loaded = true
+    } catch (e) {
+      console.error(e)
+    }
   },
 }
 </script>

@@ -1,5 +1,6 @@
 <template>
   <div class="">
+    <h1 class="">Vehicle Type: {{ item.vehicle_type_code1 }}</h1>
     <ChartComponent v-if="loaded" :data="chartData" :options="chartOptions" />
   </div>
 </template>
