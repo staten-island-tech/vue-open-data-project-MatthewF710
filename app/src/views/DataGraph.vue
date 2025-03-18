@@ -1,24 +1,14 @@
 <template>
   <div class="">
-    <Bar v-if="loaded" :data="chartData" />
+    <ChartComponent v-if="loaded" :data="chartData" :options="chartOptions" />
   </div>
 </template>
 
 <script setup>
+import ChartComponent from '@/components/ChartComponent.vue'
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import { Bar } from 'vue-chartjs'
-import {
-  Chart as ChartJS,
-  Title,
-  Tooltip,
-  Legend,
-  BarElement,
-  CategoryScale,
-  LinearScale,
-} from 'chart.js'
-ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
-//find out how to make vue-ChartJS work
+
 const route = useRoute()
 const stored_data = ref([])
 async function getData() {
