@@ -1,13 +1,14 @@
 <template>
   <div class="container">
-    <Bar v-if="loaded" :data="chartData" />
+    <Pie :data="chartData" />
   </div>
 </template>
 
 <script>
-import { Bar } from 'vue-chartjs'
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
+import { Pie } from 'vue-chartjs'
 import { onMounted, ref } from 'vue'
-import * as chartConfig from './chartConfig.js'
+import * as chartConfig from '../chartConfig.js'
 
 ChartJS.register(ArcElement, Tooltip, Legend) // got all this stuff from vuechartjs website
 
