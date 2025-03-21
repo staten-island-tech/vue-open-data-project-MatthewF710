@@ -18,6 +18,7 @@ export default {
     //got from chatgpt on how to combine my code files
     const chartData = ref(null)
     const carTypes = ref([])
+    const excludedTypes = ref([])
     const carNumbers = ref([])
     const sectorColor = ref([])
     function rngCOLOR() {
@@ -34,20 +35,30 @@ export default {
         const response = await fetch('https://data.cityofnewyork.us/resource/h9gi-nx95.json')
         const carEntries = await response.json()
         //getting all data stuff
+        let otherVehicleNumberCount = 0
         carEntries.forEach((entry) => {
-          if (!carTypes.value.includes(entry.vehicle_type_code1)) {
-            carTypes.value.push(entry.vehicle_type_code1)
+          if (
+            !carTypes.value.includes(entry.vehicle_type_code1) &&
+            !excludedTypes.value.includes(entry.vehicle_type_code1)
+          ) {
+            let potentialcategory = entry.vehicle_type_code1
+            let newCategoryCount = 0
+            carEntries.forEach((object) => {
+              if (object.vehicle_type_code1 === potentialcategory) {
+                newCategoryCount += 1
+              }
+            })
+            if (newCategoryCount < 14) {
+              otherVehicleNumberCount += newCategoryCount
+              excludedTypes.value.push(potentialcategory)
+            } else {
+              carTypes.value.push(potentialcategory)
+              carNumbers.value.push(newCategoryCount)
+            }
           }
         })
-        carTypes.value.forEach((Car) => {
-          let numberCount = 0
-          carEntries.forEach((object) => {
-            if (object.vehicle_type_code1 === Car) {
-              numberCount += 1
-            }
-          })
-          carNumbers.value.push(numberCount)
-        })
+        carTypes.value.push('Other Vehicles')
+        carNumbers.value.push(otherVehicleNumberCount)
         for (let i = 0; i < carTypes.value.length; i++) {
           let selectedColor = rngCOLOR()
           sectorColor.value.push(selectedColor)
