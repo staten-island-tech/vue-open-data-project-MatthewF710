@@ -14,6 +14,11 @@ const router = createRouter({
       name: 'Graph',
       component: () => import('../views/DataGraph.vue'),
     },
+    {
+      path: '/search',
+      name: 'Search',
+      component: () => import('../views/CrashSearch.vue'),
+    },
   ],
 })
 
